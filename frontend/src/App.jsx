@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 
 import './App.css';
 import AddTransaction from './components/AddTransaction';
+import SetBudget from './components/SetBudget';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path='/init' element={<ProfileForm />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/add-transaction' element={<AddTransaction />} />
+        <Route path='/set-budget' element={<SetBudget />} />
+
 
       </Routes>
     </BrowserRouter>

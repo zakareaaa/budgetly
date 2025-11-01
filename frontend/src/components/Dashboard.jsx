@@ -173,8 +173,8 @@ const Dashboard = () => {
                 <p className="empty-subtext">Add your first transaction to get started!</p>
               </div>
             ) : (
-              <div>
-                {transactions.slice(0, 5).map((transaction) => (
+              <div className='transactions-list'>
+                {transactions.map((transaction) => (
                   <div key={transaction._id} className="transaction-item">
                     <div className="transaction-info">
                       <div className={`transaction-icon ${
@@ -220,44 +220,74 @@ const Dashboard = () => {
           </div>
 
           {/* BUDGETS */}
-          <div className="budget-section">
-            <div className="section-header">
-              <h2 className="section-title">Budget Overview</h2>
+          {/* BUDGETS */}
+<div className="budget-section">
+  <div className="section-header">
+    <h2 className="section-title">Budget Overview</h2>
+    <button
+      className="add-btn"
+      onClick={() => navigate('/set-budget')}
+    >
+      + Manage Budgets
+    </button>
+  </div>
+
+  {budgets.length === 0 ? (
+    <div className="empty-state">
+      <p>🎯 No budgets set</p>
+      <p className="empty-subtext">Track your spending by setting category budgets.</p>
+      <button
+        className="add-btn"
+        style={{ marginTop: '15px' }}
+        onClick={() => navigate('/set-budget')}
+      >
+        + Set Budget
+      </button>
+    </div>
+  ) : (
+    <div className="budgets-grid">
+      {budgets.map((budget, index) => {
+        const percentage = Math.min(budget.percentage || 0, 100);
+        const status = budget.status || (
+          percentage >= 100 ? 'danger' :
+          percentage >= 80 ? 'warning' : 'good'
+        );
+
+        return (
+          <div key={index} className={`budget-card status-${status}`}>
+            <div className="budget-header">
+              <span className="budget-category">{budget.category}</span>
+              <span className="budget-amount">
+                ${budget.spent || 0} / ${budget.budget}
+              </span>
             </div>
 
-            {budgets.length === 0 ? (
-              <div className="empty-state">
-                <p>🎯 No budgets set</p>
-                <p className="empty-subtext">Set budgets to track your spending!</p>
-                <button
-                  className="add-btn"
-                  style={{ marginTop: '15px' }}
-                  onClick={() => navigate('/set-budget')}
-                >
-                  + Set Budget
-                </button>
-              </div>
-            ) : (
-              <div>
-                {budgets.map((budget, index) => (
-                  <div key={index} className="budget-item">
-                    <div className="budget-header">
-                      <span className="budget-category">{budget.category}</span>
-                      <span className="budget-amounts">
-                        ${budget.spent} / ${budget.budget}
-                      </span>
-                    </div>
-                    <div className="budget-progress">
-                      <div
-                        className={`budget-fill progress-${budget.status || 'good'}`}
-                        style={{ width: `${Math.min(budget.percentage || 0, 100)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="budget-progress">
+              <div
+                className={`budget-progress-fill ${status}`}
+                style={{ width: `${percentage}%` }}
+              ></div>
+            </div>
+
+            <div className="budget-footer">
+              <span className={`status-label ${status}`}>
+                {status === 'danger'
+                  ? '⚠️ Over Budget'
+                  : status === 'warning'
+                  ? '⚠️ Near Limit'
+                  : '✅ On Track'}
+              </span>
+              <span className="budget-percent">
+                {Math.round(percentage)}%
+              </span>
+            </div>
           </div>
+        );
+      })}
+    </div>
+  )}
+</div>
+
 
         </div>
       </div>
