@@ -253,6 +253,64 @@ app.post('/api/delete-transaction', async (req, res) => {
   }
 });
 
+// --- Set or update a budget for a category ---
+app.post('/api/set-budget', async (req, res) => {
+  const { email, category, budget } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Initialize budgets if not exist
+    if (!user.budgets) user.budgets = [];
+
+    // Find if category already exists
+    const existingBudget = user.budgets.find(b => b.category === category);
+
+    if (existingBudget) {
+      // Update existing
+      existingBudget.budget = budget;
+    } else {
+      // Add new
+      user.budgets.push({
+        category,
+        budget,
+        spent: 0,
+        percentage: 0,
+        status: 'good'
+      });
+    }
+
+    await user.save();
+    res.json({ message: 'Budget saved successfully', budgets: user.budgets });
+
+  } catch (err) {
+    console.error('🔥 Error setting budget:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// --- Delete a budget ---
+app.post('/api/delete-budget', async (req, res) => {
+  const { email, category } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Remove the matching category
+    user.budgets = user.budgets.filter(b => b.category !== category);
+
+    await user.save();
+    res.json({ message: 'Budget deleted successfully', budgets: user.budgets });
+
+  } catch (err) {
+    console.error('🔥 Error deleting budget:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 
 app.listen(PORT, () => {

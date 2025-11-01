@@ -662,6 +662,316 @@ button:active {
   transform: scale(1.2);
 }
 
+.transactions-list {
+  height: 400px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+
+/* Optional: make scrollbar look nicer */
+.transactions-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transactions-list::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 4px;
+}
+
+.transactions-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+/*Budget*/
+
+.set-budget-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap:20px;
+}
+
+.budget-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.back-btn {
+  background: #eef2f7;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #e0e5ec;
+}
+
+/* --- Form Section --- */
+.budget-form-section {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.budget-form-section h3 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.budget-form {
+  width: 100%;
+  max-width: 700px; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+.budget-form button{
+  margin: 0 auto;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 250px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+select,
+input[type="number"] {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+select:focus,
+input[type="number"]:focus {
+  border-color: #007bff;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  max-width: 220px;
+}
+
+.submit-btn:hover {
+  background-color: #0066d6;
+}
+
+/* --- Budgets List --- */
+.existing-budgets {
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.existing-budgets h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.no-budgets {
+  color: #777;
+  font-style: italic;
+}
+
+.budgets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.budget-card {
+  background: #f9fafb;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.budget-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-card-header h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.delete-budget-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.delete-budget-btn:hover {
+  transform: scale(1.2);
+}
+
+.budget-amounts {
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #333;
+}
+
+.separator {
+  color: #777;
+}
+
+.budget-progress-bar {
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.budget-progress-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+/* Colors based on status */
+.status-good {
+  background-color: #28a745;
+}
+
+.status-warning {
+  background-color: #ffc107;
+}
+
+.status-danger {
+  background-color: #dc3545;
+}
+
+.budget-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.status-badge {
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+.status-badge.good {
+  background-color: #28a745;
+}
+
+.status-badge.warning {
+  background-color: #ffc107;
+  color: #222;
+}
+
+.status-badge.danger {
+  background-color: #dc3545;
+}
+
+.percentage {
+  font-weight: 600;
+  color: #555;
+}
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.budget-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.edit-budget-btn,
+.save-budget-btn,
+.cancel-budget-btn,
+.delete-budget-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.save-budget-btn {
+  color: green;
+}
+
+.cancel-budget-btn {
+  color: gray;
+}
+
+.delete-budget-btn {
+  color: red;
+}
+
+
 /* Responsive */
 @media (max-width: 600px) {
   .add-transaction-form form {
@@ -734,3 +1044,29 @@ button:active {
   }
 }
 
+
+/* Dashboard Budgets Grid */
+.budgets-grid {
+  max-height: 400px; /* adjust as needed */
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  row-gap: 30px; /* increase vertical spacing */
+  column-gap: 20px; /* spacing between columns */
+  padding-right: 10px; /* for scrollbar spacing */
+}
+
+
+/* Optional: nicer scrollbar */
+.budgets-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.budgets-grid::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 4px;
+}
+
+.budgets-grid::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.7);
+}
