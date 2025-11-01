@@ -24,6 +24,7 @@ const ProfileForm = () => {
   useEffect(() => {
     if (user && user.stats) {
       setStats({
+        ...user.stats,
         currentBalance: user.stats.currentBalance || "",
         monthlyIncome: user.stats.monthlyIncome || "",
         savingsGoal: user.stats.savingsGoal || "",
@@ -69,21 +70,23 @@ const ProfileForm = () => {
     <div className="initial-data-form">
       <h2>Welcome, {user?.name}! Complete Your Profile</h2>
       <form onSubmit={handleSubmit}>
-        {Object.keys(stats).map((key) => (
-          <div key={key}>
-            <label>{toProperCase(key)}</label>
-            <input
-              type="number"
-              name={key}
-              value={stats[key]}
-              onChange={handleChange}
-              placeholder="Enter amount"
-              required
-            />
-          </div>
-        ))}
-        <button type="submit">Save and Continue</button>
-      </form>
+  {Object.keys(stats)
+    .filter((key) => key !== "monthlySpending") // exclude monthlySpending
+    .map((key) => (
+      <div key={key}>
+        <label>{toProperCase(key)}</label>
+        <input
+          type="number"
+          name={key}
+          value={stats[key]}
+          onChange={handleChange}
+          placeholder="Enter amount"
+          required
+        />
+      </div>
+    ))}
+  <button type="submit">Save and Continue</button>
+</form>
     </div>
   );
 };
